@@ -1,7 +1,7 @@
 {
   "name": "skillhubapi",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "src/app.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,6 +12,8 @@
   "description": "",
   "dependencies": {
     "express": "^5.1.0",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.16.5",
     "nodemon": "^3.1.10"
   }
 }
