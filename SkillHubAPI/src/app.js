@@ -15,6 +15,7 @@ const port = 8080
 
 import routeUsuarios from '../routes/routeUsuarios.js'
 
+app.use(express.json());
 app.use('/usuarios', routeUsuarios)
 
 
