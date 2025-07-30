@@ -8,7 +8,7 @@ const usuarioSchema = new mongoose.Schema({
     criadoEm: {type: Date, default: Date.now }
 })
 
-const Usuario = mongoose.model('Usuários', usuarioSchema);
+const Usuario = mongoose.model('usuarios', usuarioSchema);
 
 export default Usuario
 

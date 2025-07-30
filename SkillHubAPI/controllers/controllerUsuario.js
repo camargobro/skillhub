@@ -1,12 +1,16 @@
 import Usuario from "../models/modelUsuarios.js"
+import bcrypt from "bcrypt"
 
 export async function criarUsuario(req, res){
+    const saltRounds = 10;
+    const senhaHash = await bcrypt.hash(req.body.senha, saltRounds)
     const usuario = new Usuario({
         nome: req.body.nome,
         idade: req.body.idade,
         email: req.body.email,
-        senha: req.body.senha
+        senha: senhaHash
 })
+
     await usuario.save()
     res.status(201).send(usuario)
 }
