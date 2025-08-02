@@ -27,7 +27,9 @@ export async function putUsuario(id, usuarioAtualizado){
     return await Usuario.findByIdAndUpdate(id, usuarioAtualizado)
 }
 
-
+export async function loginUsuario(email){
+    return await Usuario.findOne({email})
+}
 
 
 
