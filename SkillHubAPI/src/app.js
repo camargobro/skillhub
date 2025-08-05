@@ -1,6 +1,7 @@
 import express from 'express'
 import conectaDB from './config/dbConnect.js'
 import routeUsuarios from '../routes/routeUsuarios.js'
+import routeHabilidades from '../routes/routeHabilidades.js'
 
 const app = express()
 const port = 8080
@@ -16,6 +17,7 @@ conexao.once("open", () => {
 
 app.use(express.json());
 app.use('/usuarios', routeUsuarios)
+app.use('/habilidades', routeHabilidades)
 
 app.listen(port, () =>{
     console.log(`Servidor rodando na porta ${port}`)
