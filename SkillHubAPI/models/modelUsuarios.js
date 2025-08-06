@@ -5,10 +5,11 @@ const usuarioSchema = new mongoose.Schema({
     idade: { type: Number, required: true },
     email: { type: String, required: true },
     senha: { type: String, required: true },
+    encontros: [{ type: mongoose.Schema.Types.ObjectId, ref: 'encontros' }],
     criadoEm: { type: Date, default: Date.now }
 })
 
-const Usuario = mongoose.model('usuarios', usuarioSchema);
+export const Usuario = mongoose.model('usuarios', usuarioSchema);
 
 export async function postUsuario(dadosUsuario){
     const usuario = new Usuario(dadosUsuario)
@@ -16,7 +17,7 @@ export async function postUsuario(dadosUsuario){
 }
 
 export async function getUsuarios(){
-    return await Usuario.find()
+    return await Usuario.find().populate('encontros')
 }
 
 export async function deleteUsuario(id){
@@ -30,6 +31,5 @@ export async function putUsuario(id, usuarioAtualizado){
 export async function loginUsuario(email){
     return await Usuario.findOne({email})
 }
-
 
 

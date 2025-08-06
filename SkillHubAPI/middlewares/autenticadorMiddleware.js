@@ -18,3 +18,4 @@ export function autenticadorMiddleware(req, res, next){
     next();
   });
 }
+
