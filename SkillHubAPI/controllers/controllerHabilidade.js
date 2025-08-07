@@ -3,6 +3,10 @@ import { deleteHabilidade, getHabilidades, postHabilidades, putHabilidade } from
 export async function criarHabilidade(req, res){
     try{
         const {nome, descricao} = req.body;
+
+        if(!nome, descricao){
+            res.status(401).send('Todos os campos devem ser preenchidos')
+        }
         await postHabilidades({
             nome,
             descricao
@@ -15,6 +19,10 @@ export async function criarHabilidade(req, res){
 export async function buscarHabilidades(req, res){
     try{
         const habilidades = await getHabilidades()
+
+        if(!habilidades){
+            return res.status(404).send('Habilidade não encontrada')
+        }
         res.status(200).send(habilidades)
     }catch(error){
         res.status(500).send(error)
@@ -36,6 +44,9 @@ export async function editarHabilidade(req, res){
 export async function excluirHabilidade(req, res){
     try{
         const id = req.params.id
+        if(!id){
+            res.status(404).send('Habilidade não encontrada')
+        }
         await deleteHabilidade(id)
         res.status(200).send('Habilidade excluída com sucesso!')
     }catch(error){
