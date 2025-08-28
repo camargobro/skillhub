@@ -1,4 +1,4 @@
-import mongoose, { mongo } from 'mongoose'
+import mongoose from 'mongoose'
 
 const usuarioSchema = new mongoose.Schema({
     nome: { type: String, required: true },
@@ -6,6 +6,7 @@ const usuarioSchema = new mongoose.Schema({
     email: { type: String, required: true },
     senha: { type: String, required: true },
     encontros: [{ type: mongoose.Schema.Types.ObjectId, ref: 'encontros' }],
+    habilidades: [{ type: mongoose.Schema.Types.ObjectId, ref: 'habilidades' }],
     criadoEm: { type: Date, default: Date.now }
 })
 
@@ -30,6 +31,11 @@ export async function putUsuario(id, usuarioAtualizado){
 
 export async function loginUsuario(email){
     return await Usuario.findOne({email})
+}
+
+export async function escolherHabilidade(usuario, habilidades){
+    return await Usuario.findByIdAndUpdate(usuario, 
+    { $addToSet: { habilidades: { $each: habilidades } } }, { new: true })
 }
 
 

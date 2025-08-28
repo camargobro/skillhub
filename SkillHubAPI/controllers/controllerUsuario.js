@@ -1,4 +1,4 @@
-import { getUsuarios, deleteUsuario, postUsuario, putUsuario, loginUsuario } from "../models/modelUsuarios.js"
+import { getUsuarios, deleteUsuario, postUsuario, putUsuario, loginUsuario, escolherHabilidade } from "../models/modelUsuarios.js"
 import jwt from 'jsonwebtoken'
 import bcrypt from "bcrypt"
 import dotenv from "dotenv"
@@ -99,5 +99,17 @@ export async function logarUsuario(req, res){
     } catch(error){
         res.status(500).send('Ocorreu um erro.')
         console.log(error)
+    }
+}
+
+export async function escolhaHabilidades(req, res){
+    try{
+        const id = req.params.id
+        const {habilidades} = req.body
+        const usuarioAtualizado = await escolherHabilidade(id, habilidades)
+
+        res.status(201).send(usuarioAtualizado)
+    } catch(error){
+        res.status(500).send(error)
     }
 }
